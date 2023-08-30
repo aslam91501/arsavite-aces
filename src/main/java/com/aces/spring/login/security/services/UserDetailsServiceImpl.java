@@ -1,3 +1,5 @@
+// This package is used for validation of data from database
+
 package com.aces.spring.login.security.services;
 
 import com.aces.spring.login.models.User;
