@@ -17,4 +17,4 @@
 | PUT    | `/bands/1`                | Update band info              |
 | POST   | `/bands/create`           | Create a new band             |
 
-Params will be soon updated.
+Most param's are available in the postman ; Feel free to add or remove params :)
