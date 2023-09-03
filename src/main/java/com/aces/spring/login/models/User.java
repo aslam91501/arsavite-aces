@@ -14,7 +14,33 @@ import jakarta.validation.constraints.Size;
            @UniqueConstraint(columnNames = "username"),
            @UniqueConstraint(columnNames = "email")
        })
+
+
+
 public class User {
+
+  @ManyToMany
+  @JoinTable(
+          name = "user_followed_bands",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "band_id")
+  )
+  private Set<Band> followedBands = new HashSet<>();
+
+  public Set<Band> getFollowedBands() {
+    return followedBands;
+  }
+
+  public void followBand(Band band) {
+    followedBands.add(band);
+    band.addFollower(this);
+  }
+
+  public void unfollowBand(Band band) {
+    followedBands.remove(band);
+    band.removeFollower(this);
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

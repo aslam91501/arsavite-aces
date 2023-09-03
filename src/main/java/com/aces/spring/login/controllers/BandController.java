@@ -2,9 +2,13 @@ package com.aces.spring.login.controllers;
 
 import com.aces.spring.login.models.Band;
 import com.aces.spring.login.repository.BandRepository;
+import com.aces.spring.login.service.BandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import com.aces.spring.login.models.User;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -14,11 +18,26 @@ import java.util.Optional;
 public class BandController {
     @Autowired
     private BandRepository bandRepository;
+    private final BandService bandService;
+
+    public BandController(BandService bandService) {
+        this.bandService = bandService;
+    }
 
     @PostMapping("/create")
     public ResponseEntity<Band> createBand(@RequestBody Band band) {
         Band savedBand = bandRepository.save(band);
         return ResponseEntity.ok(savedBand);
+    }
+
+    @PostMapping("/{bandId}/follow")
+    public Band followBand(@PathVariable Long bandId, @AuthenticationPrincipal User user) {
+        return bandService.followBand(bandId, user);
+    }
+
+    @PostMapping("/{bandId}/unfollow")
+    public Band unfollowBand(@PathVariable Long bandId, @AuthenticationPrincipal User user) {
+        return bandService.unfollowBand(bandId, user);
     }
 
     @GetMapping("/all")

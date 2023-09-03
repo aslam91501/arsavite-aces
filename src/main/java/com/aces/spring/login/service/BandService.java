@@ -4,6 +4,7 @@ import com.aces.spring.login.models.Band;
 import com.aces.spring.login.repository.BandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.aces.spring.login.models.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,11 @@ import java.util.Optional;
 public class BandService {
     @Autowired
     private BandRepository bandRepository;
+
+    @Autowired
+    public BandService(BandRepository bandRepository) {
+        this.bandRepository = bandRepository;
+    }
 
     public Band createBand(Band band) {
         return bandRepository.save(band);
@@ -42,4 +48,23 @@ public class BandService {
         Optional<Band> optionalBand = bandRepository.findById(id);
         optionalBand.ifPresent(bandRepository::delete);
     }
+
+    public Band followBand(Long bandId, User user) {
+        Band band = bandRepository.findById(bandId).orElse(null);
+        if (band != null) {
+            user.followBand(band);
+            return bandRepository.save(band);
+        }
+        return null;
+    }
+
+    public Band unfollowBand(Long bandId, User user) {
+        Band band = bandRepository.findById(bandId).orElse(null);
+        if (band != null) {
+            user.unfollowBand(band);
+            return bandRepository.save(band);
+        }
+        return null;
+    }
+
 }

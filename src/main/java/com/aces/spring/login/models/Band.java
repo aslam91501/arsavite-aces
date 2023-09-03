@@ -1,9 +1,9 @@
 package com.aces.spring.login.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Band {
@@ -23,6 +23,9 @@ public class Band {
     private String youtubeLink;
     private String bio;
     private String genre;
+
+    @ManyToMany(mappedBy = "followedBands")
+    private Set<User> followers = new HashSet<>();
 
     // Constructors
 
@@ -47,6 +50,18 @@ public class Band {
     }
 
     // Getters and Setters
+
+    public Set<User> getFollowers() {
+        return followers;
+    }
+
+    public void addFollower(User user) {
+        followers.add(user);
+    }
+
+    public void removeFollower(User user) {
+        followers.remove(user);
+    }
 
     public Long getId() {
         return id;
