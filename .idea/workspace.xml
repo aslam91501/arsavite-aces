@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="277b41ba-5402-41eb-92f3-8b26e3163bb2" name="Changes" comment="adding Gitignore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/SpringBootLoginExampleApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/SpringBootLoginExampleApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
