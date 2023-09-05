@@ -18,3 +18,18 @@
 | POST   | `/bands/create`           | Create a new band             |
 
 Most param's are available in the postman ; Feel free to add or remove params :)
+
+
+
+| Request Type | Endpoint                | Description                            |
+| ------------ | ----------------------- | -------------------------------------- |
+| POST         | `/bands/create`         | Create a new band.                     |
+| POST         | `/bands/follow`         | Follow a band.                         |
+| POST         | `/bands/unfollow`       | Unfollow a band.                       |
+| GET          | `/bands/all`            | Retrieve a list of all bands.          |
+| GET          | `/bands/{id}`           | Retrieve a specific band by ID.        |
+| GET          | `/bands/{id}/followers` | Retrieve a list of band followers.     |
+| PUT          | `/bands/update/{id}`    | Update the details of a specific band. |
+| DELETE       | `/bands/delete/{id}`    | Delete a specific band by ID.          |
+
+
