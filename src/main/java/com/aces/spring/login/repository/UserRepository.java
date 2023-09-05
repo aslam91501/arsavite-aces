@@ -1,5 +1,6 @@
 package com.aces.spring.login.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.aces.spring.login.models.User;
@@ -13,4 +14,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
   Boolean existsByUsername(String username);
 
   Boolean existsByEmail(String email);
+
+  List<User> findByFollowedBandsContaining(Long bandId);
 }

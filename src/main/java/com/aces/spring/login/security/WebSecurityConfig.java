@@ -91,9 +91,10 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
             .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth ->
-                    auth.requestMatchers("/api/auth/**").permitAll()
+                    auth.requestMatchers("*/**").permitAll()
                             .requestMatchers("/api/test/**").permitAll()
                             .requestMatchers("/bands/*").permitAll() // Public endpoint
+                            .requestMatchers("/bands/*/follow").permitAll() // Permit unauthenticated access to /bands/{bandId}/follow
                             .requestMatchers("/hello").permitAll() // Permit unauthenticated access to /hello
                             .anyRequest().authenticated()
             );

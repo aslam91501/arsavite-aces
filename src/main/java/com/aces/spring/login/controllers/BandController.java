@@ -1,15 +1,20 @@
 package com.aces.spring.login.controllers;
 
 import com.aces.spring.login.models.Band;
+import com.aces.spring.login.payload.request.BandFollowRequest;
+import com.aces.spring.login.payload.request.BandUnfollowRequest;
 import com.aces.spring.login.repository.BandRepository;
+import com.aces.spring.login.repository.UserRepository;
 import com.aces.spring.login.service.BandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import com.aces.spring.login.models.User;
 
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +23,9 @@ import java.util.Optional;
 public class BandController {
     @Autowired
     private BandRepository bandRepository;
+
+    @Autowired
+    private UserRepository userRepository;
     private final BandService bandService;
 
     public BandController(BandService bandService) {
@@ -25,19 +33,25 @@ public class BandController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Band> createBand(@RequestBody Band band) {
+    public ResponseEntity<Band> createBand(@RequestBody Band band, Principal principal) {
+        String username = principal.getName();
+
+        User user = userRepository.findByUsername(username).orElse(null);
+
+        band.setCreatorId(user.getId());
+
         Band savedBand = bandRepository.save(band);
         return ResponseEntity.ok(savedBand);
     }
 
-    @PostMapping("/{bandId}/follow")
-    public Band followBand(@PathVariable Long bandId, @AuthenticationPrincipal User user) {
-        return bandService.followBand(bandId, user);
+    @PostMapping("/follow")
+    public User followBand(@RequestBody BandFollowRequest request) {
+        return bandService.followBand(request.getBandId(), request.getUserId());
     }
 
-    @PostMapping("/{bandId}/unfollow")
-    public Band unfollowBand(@PathVariable Long bandId, @AuthenticationPrincipal User user) {
-        return bandService.unfollowBand(bandId, user);
+    @PostMapping("/unfollow")
+    public User followBand(@RequestBody BandUnfollowRequest request) {
+        return bandService.unfollowBand(request.getBandId(), request.getUserId());
     }
 
     @GetMapping("/all")
@@ -56,6 +70,15 @@ public class BandController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/{id}/followers")
+    public ResponseEntity<List<User>> getBandFollowers(@PathVariable Long id) {
+        List<User> followers = bandService.getFollowers(id);
+
+        return new ResponseEntity<>(followers, HttpStatus.OK);
+    }
+
+
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Band> updateBand(@PathVariable Long id, @RequestBody Band band) {

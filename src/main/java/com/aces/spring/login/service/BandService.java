@@ -2,6 +2,7 @@ package com.aces.spring.login.service;
 
 import com.aces.spring.login.models.Band;
 import com.aces.spring.login.repository.BandRepository;
+import com.aces.spring.login.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.aces.spring.login.models.User;
@@ -15,9 +16,8 @@ public class BandService {
     private BandRepository bandRepository;
 
     @Autowired
-    public BandService(BandRepository bandRepository) {
-        this.bandRepository = bandRepository;
-    }
+    private UserRepository userRepository;
+
 
     public Band createBand(Band band) {
         return bandRepository.save(band);
@@ -49,22 +49,31 @@ public class BandService {
         optionalBand.ifPresent(bandRepository::delete);
     }
 
-    public Band followBand(Long bandId, User user) {
+    public User followBand(long bandId, long userId) {
         Band band = bandRepository.findById(bandId).orElse(null);
-        if (band != null) {
-            user.followBand(band);
-            return bandRepository.save(band);
+        User user = userRepository.findById(userId).orElse(null);
+
+        if (user != null && !user.getFollowedBands().contains(bandId)) {
+            user.getFollowedBands().add(bandId);
+            return userRepository.save(user);
         }
         return null;
     }
 
-    public Band unfollowBand(Long bandId, User user) {
+    public User unfollowBand(Long bandId, Long userId) {
         Band band = bandRepository.findById(bandId).orElse(null);
-        if (band != null) {
-            user.unfollowBand(band);
-            return bandRepository.save(band);
+        User user = userRepository.findById(userId).orElse(null);
+
+        if (user != null && user.getFollowedBands().contains(bandId)) {
+            user.getFollowedBands().remove(bandId);
+            return userRepository.save(user);
         }
         return null;
     }
 
+    public List<User> getFollowers(Long id) {
+        List<User> followers = userRepository.findByFollowedBandsContaining(id);
+
+        return followers;
+    }
 }

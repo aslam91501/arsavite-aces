@@ -11,6 +11,7 @@ public class Band {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long creatorId;
     private String name;
     private String logoUrl;
     private String coverPictureUrl;
@@ -24,8 +25,6 @@ public class Band {
     private String bio;
     private String genre;
 
-    @ManyToMany(mappedBy = "followedBands")
-    private Set<User> followers = new HashSet<>();
 
     // Constructors
 
@@ -51,17 +50,6 @@ public class Band {
 
     // Getters and Setters
 
-    public Set<User> getFollowers() {
-        return followers;
-    }
-
-    public void addFollower(User user) {
-        followers.add(user);
-    }
-
-    public void removeFollower(User user) {
-        followers.remove(user);
-    }
 
     public Long getId() {
         return id;
@@ -97,6 +85,14 @@ public class Band {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Long getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
     }
 
     public String getMailId() {

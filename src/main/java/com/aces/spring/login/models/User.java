@@ -1,6 +1,8 @@
 package com.aces.spring.login.models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -18,27 +20,11 @@ import jakarta.validation.constraints.Size;
 
 
 public class User {
+  @ElementCollection(fetch = FetchType.EAGER)
+  private List<Long> followedBands = new ArrayList<>();
 
-  @ManyToMany
-  @JoinTable(
-          name = "user_followed_bands",
-          joinColumns = @JoinColumn(name = "user_id"),
-          inverseJoinColumns = @JoinColumn(name = "band_id")
-  )
-  private Set<Band> followedBands = new HashSet<>();
-
-  public Set<Band> getFollowedBands() {
+  public List<Long> getFollowedBands() {
     return followedBands;
-  }
-
-  public void followBand(Band band) {
-    followedBands.add(band);
-    band.addFollower(this);
-  }
-
-  public void unfollowBand(Band band) {
-    followedBands.remove(band);
-    band.removeFollower(this);
   }
 
   @Id
@@ -72,6 +58,7 @@ public class User {
     this.email = email;
     this.password = password;
   }
+
 
   public Long getId() {
     return id;

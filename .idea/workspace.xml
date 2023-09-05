@@ -5,16 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="277b41ba-5402-41eb-92f3-8b26e3163bb2" name="Changes" comment="adding Gitignore">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/payload/request/BandFollowRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/payload/request/BandUnfollowRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/SpringBootLoginExampleApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/SpringBootLoginExampleApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/controllers/BandController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/controllers/BandController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/models/Band.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/models/Band.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/security/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/security/jwt/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/security/jwt/JwtUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/service/BandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/aces/spring/login/service/BandService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/aces/spring/login/SpringBootLoginExampleApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/aces/spring/login/SpringBootLoginExampleApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/aces/spring/login/controllers/BandController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/aces/spring/login/controllers/BandController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/aces/spring/login/models/Band.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/aces/spring/login/models/Band.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/aces/spring/login/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/aces/spring/login/models/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/aces/spring/login/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/aces/spring/login/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/aces/spring/login/security/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/aces/spring/login/security/WebSecurityConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/aces/spring/login/service/BandService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/aces/spring/login/service/BandService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,30 +63,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "useraddition-band",
-    "last_opened_file_path": "/home/amal/Downloads/arsavite-aces",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "spring.configuration.checksum": "87e8855feacb3557a3176d30d8a2fa1e",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;bug-to-fix&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/amal/Downloads/arsavite-aces&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;87e8855feacb3557a3176d30d8a2fa1e&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.aces.spring.login.payload.request" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -121,6 +139,8 @@
       <workItem from="1692092367893" duration="148000" />
       <workItem from="1692092532721" duration="17000" />
       <workItem from="1693684041983" duration="1375000" />
+      <workItem from="1693817677364" duration="1000" />
+      <workItem from="1693898074192" duration="5186000" />
     </task>
     <task id="LOCAL-00001" summary="Removed Gitignore">
       <option name="closed" value="true" />
