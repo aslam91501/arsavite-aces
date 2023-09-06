@@ -34,7 +34,8 @@ public class BandController {
 
     @PostMapping("/create")
     public ResponseEntity<Band> createBand(@RequestBody Band band, Principal principal) {
-        String username = principal.getName();
+
+        String username = "Admin123";
 
         User user = userRepository.findByUsername(username).orElse(null);
 
@@ -106,3 +107,4 @@ public class BandController {
         }
     }
 }
+

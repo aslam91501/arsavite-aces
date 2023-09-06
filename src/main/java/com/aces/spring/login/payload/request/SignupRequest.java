@@ -17,8 +17,10 @@ public class SignupRequest {
     private Set<String> role;
     
     @NotBlank
-    @Size(min = 6, max = 40)
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=\\S+$).{8,40}$")
+    //Password-validation added
     private String password;
+
   
     public String getUsername() {
         return username;
