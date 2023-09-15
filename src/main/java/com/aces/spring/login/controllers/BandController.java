@@ -6,10 +6,15 @@ import com.aces.spring.login.payload.request.BandUnfollowRequest;
 import com.aces.spring.login.repository.BandRepository;
 import com.aces.spring.login.repository.UserRepository;
 import com.aces.spring.login.service.BandService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import com.aces.spring.login.models.User;
 
@@ -33,9 +38,9 @@ public class BandController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Band> createBand(@RequestBody Band band, Principal principal) {
+    public ResponseEntity<Band> createBand(@RequestBody Band band, HttpServletRequest request) {
 
-        String username = principal.getName();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         User user = userRepository.findByUsername(username).orElse(null);
 

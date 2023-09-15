@@ -30,18 +30,25 @@ public class JwtUtils {
   @Value("${aces.app.jwtCookieName}")
   private String jwtCookie;
 
+  private String JWT_SECRET="SECRET_KEY";
+
   public String getJwtFromCookies(HttpServletRequest request) {
-    Cookie cookie = WebUtils.getCookie(request, jwtCookie);
-    if (cookie != null) {
-      return cookie.getValue();
-    } else {
-      return null;
-    }
+    if(request.getCookies() == null)
+            return null;
+
+        Cookie[] cookies = request.getCookies();
+        
+        for(Cookie cookie: cookies){
+            if(cookie.getName().equals(jwtCookie))
+                return cookie.getValue();
+        }
+
+        return null;
   }
 
   public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
     String jwt = generateTokenFromUsername(userPrincipal.getUsername());
-    ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/").maxAge(24 * 60 * 60).httpOnly(true).build();
+    ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/").maxAge(24 * 60 * 60).httpOnly(true).secure(false).sameSite("None").build();
     return cookie;
   }
 
@@ -51,7 +58,7 @@ public class JwtUtils {
   }
 
   public String getUserNameFromJwtToken(String token) {
-    return Jwts.parserBuilder().setSigningKey(key()).build()
+    return Jwts.parserBuilder().setSigningKey(JWT_SECRET.getBytes()).build()
         .parseClaimsJws(token).getBody().getSubject();
   }
 
@@ -61,7 +68,7 @@ public class JwtUtils {
 
   public boolean validateJwtToken(String authToken) {
     try {
-      Jwts.parserBuilder().setSigningKey(key()).build().parse(authToken);
+      Jwts.parserBuilder().setSigningKey(JWT_SECRET.getBytes()).build().parse(authToken);
       return true;
     } catch (MalformedJwtException e) {
       logger.error("Invalid JWT token: {}", e.getMessage());
@@ -71,6 +78,8 @@ public class JwtUtils {
       logger.error("JWT token is unsupported: {}", e.getMessage());
     } catch (IllegalArgumentException e) {
       logger.error("JWT claims string is empty: {}", e.getMessage());
+    } catch(RuntimeException e){
+      logger.error("Some JWT Parsing Error...");
     }
 
     return false;
@@ -81,7 +90,7 @@ public class JwtUtils {
               .setSubject(username)
               .setIssuedAt(new Date())
               .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-              .signWith(key(), SignatureAlgorithm.HS256)
+              .signWith(SignatureAlgorithm.HS256, JWT_SECRET.getBytes())
               .compact();
   }
 }

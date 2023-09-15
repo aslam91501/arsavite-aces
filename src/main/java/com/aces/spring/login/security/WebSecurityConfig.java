@@ -2,6 +2,9 @@ package com.aces.spring.login.security;
 
 import com.aces.spring.login.security.jwt.AuthTokenFilter;
 import com.aces.spring.login.security.services.UserDetailsServiceImpl;
+
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +21,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.aces.spring.login.security.jwt.AuthEntryPointJwt;
 
@@ -53,6 +59,21 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 
     return authProvider;
   }
+
+  @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new
+                UrlBasedCorsConfigurationSource();
+
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin("http://localhost:5173");
+		corsConfiguration.setAllowedMethods(Arrays.asList("PUT", "POST", "GET", "OPTIONS", "DELETE"));
+        corsConfiguration.addAllowedHeader("*");
+        corsConfiguration.setAllowCredentials(true);
+
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        return source;
+    }
 
 //  @Bean
 //  @Override
@@ -91,7 +112,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
             .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth ->
-                    auth.requestMatchers("*/**").permitAll()
+                    auth.requestMatchers("/api/auth/*").permitAll()
                             .requestMatchers("/api/test/**").permitAll()
                             .requestMatchers("/bands/*").permitAll() // Public endpoint
                             .requestMatchers("/bands/*/follow").permitAll() // Permit unauthenticated access to /bands/{bandId}/follow

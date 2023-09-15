@@ -14,10 +14,14 @@ import com.aces.spring.login.payload.response.MessageResponse;
 import com.aces.spring.login.payload.response.UserInfoResponse;
 import com.aces.spring.login.repository.UserRepository;
 import com.aces.spring.login.security.jwt.JwtUtils;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -56,7 +60,7 @@ public class AuthController {
   JwtUtils jwtUtils;
 
   @PostMapping("/signin")
-  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse httpServletResponse) {
 
     Authentication authentication = authenticationManager
         .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -71,11 +75,18 @@ public class AuthController {
         .map(item -> item.getAuthority())
         .collect(Collectors.toList());
 
-    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-        .body(new UserInfoResponse(userDetails.getId(),
-                                   userDetails.getUsername(),
-                                   userDetails.getEmail(),
-                                   roles));
+    Cookie cookie = new Cookie("bezkoder-jwt", jwtCookie.getValue());
+    cookie.setHttpOnly(true);
+    cookie.setMaxAge(10*60*60);
+    cookie.setSecure(false);
+    cookie.setPath("/");
+    // cookie.setDomain("*");
+    
+
+
+    httpServletResponse.addCookie(cookie);
+
+    return new ResponseEntity<>(HttpStatus.OK);
   }
 
   @PostMapping("/signup")
